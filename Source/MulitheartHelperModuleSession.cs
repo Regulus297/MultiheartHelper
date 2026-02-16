@@ -12,5 +12,7 @@ public class MultiheartHelperModuleSession : EverestModuleSession
     public List<string> collectedItems = [];
     public List<string> collectedLogs = [];
 
+    public bool HasCateline = false;
+
     public Queue<TerminalTab.TerminalLine> terminalLines = [];
 }

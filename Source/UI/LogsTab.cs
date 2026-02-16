@@ -125,12 +125,18 @@ namespace Celeste.Mod.MultiheartHelper.UI {
                 }
 
                 ui.TargetRect = GetSelectionRect();
+                textScroll.ScrollToY(0);
 
                 return true;
             }
             if (y != 0)
             {
+                bool atTop = textScroll.Translated(0, 0).Y >= 0;
                 textScroll.ScrollByY(y * (Engine.Width/2 - InventoryUI.MARGIN));
+                if (atTop && textScroll.Translated(0, 0).Y >= 0)
+                {
+                    return false;
+                }
                 return true;
             }
             else if (x < 0)

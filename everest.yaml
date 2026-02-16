@@ -1,9 +1,7 @@
 - DLL: bin/MultiheartHelper.dll
   Name: MultiheartHelper
-  Version: 0.1.2
+  Version: 0.1.4
   Dependencies:
     - Name: Everest
     - Name: EverestCore
       Version: 1.4673.0
-    - Name: VivHelper
-      Version: 1.14.10

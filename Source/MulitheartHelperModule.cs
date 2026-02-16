@@ -42,6 +42,8 @@ public class MultiheartHelperModule : EverestModule {
         MultiheartModifier.Hook();
         SemipermanentCrumbleBlock.Hook();
         LineMirror.Hook();
+        SpinnerBreakController.Load();
+        CatelineRefill.Load();
     }
 
     private void Hook_BeforeUpdate(On.Monocle.Scene.orig_BeforeUpdate orig, Monocle.Scene self)
@@ -119,5 +121,7 @@ public class MultiheartHelperModule : EverestModule {
         multiheartData.Clear();
         SemipermanentCrumbleBlock.Unhook();
         LineMirror.Unhook();
+        SpinnerBreakController.Unload();
+        CatelineRefill.Unload();
     }
 }

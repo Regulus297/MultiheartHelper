@@ -22,6 +22,7 @@ namespace Celeste.Mod.MultiheartHelper.Entities
             terminalDialog = data.Attr("terminalDialog");
             terminalParameters = data.Attr("terminalParameters").Split(',').ToList();
             Add(talk = new TalkComponent(new Rectangle(0, 0, data.Width, data.Height), new Vector2(data.Width / 2, data.Height / 2), Interact));
+            talk.PlayerMustBeFacing = false;
         }
 
         private void Interact(Player player)
@@ -53,6 +54,7 @@ namespace Celeste.Mod.MultiheartHelper.Entities
                 yield return tab.PrintDialog(terminalDialog, [GetLogString(), ..terminalParameters]);
             }
             ui.Close();
+            talk.RemoveSelf();
             GiveLog();
         }
 

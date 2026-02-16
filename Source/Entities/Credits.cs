@@ -73,9 +73,11 @@ namespace Celeste.Mod.MultiheartHelper.Entities {
         private float scroll, height;
         private float alignment, scale;
         private float x;
+        private bool scrollOffScreen;
 
         public Credits(EntityData data, Vector2 offset): base(data.Position + offset) {
-            x = data.Position.X;
+            x = data.Float("xPos", 0f);
+            scrollOffScreen = data.Bool("scrollOffScreen", true);
             alignment = data.Float("alignment", 0.5f);
             scale = data.Float("scale", 1);
             height = 0;
@@ -92,17 +94,17 @@ namespace Celeste.Mod.MultiheartHelper.Entities {
         {
             base.Update();
             scroll += scrollSpeed * Engine.DeltaTime;
-            if (scroll < 0f || scroll > height)
+            if (scroll < 0f || (scroll > height && !scrollOffScreen))
             {
                 scrollSpeed = 0f;
             }
-            scroll = Calc.Clamp(scroll, 0f, height);
+            scroll = scrollOffScreen ? Calc.Max(scroll, 0f) : Calc.Clamp(scroll, 0f, height);
         }
 
         public override void Render()
         {
             base.Render();
-            Vector2 val = Calc.Floor(new Vector2(x, 1080 - scroll));
+            Vector2 val = Calc.Floor(new Vector2(x * Engine.Width, Engine.Height - scroll));
             foreach (CreditsNode credit in credits)
             {
                 float num = credit.Height(scale);
